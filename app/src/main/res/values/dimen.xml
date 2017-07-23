@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Height of each list item -->
+    <dimen name="list_item_height">100dp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="activity_padding">10dp</dimen>
+
+    <dimen name="button_padding">15dp</dimen>
+
+</resources>
