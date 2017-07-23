@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:hint="@string/hint_product_price"
-            android:inputType="textCapWords"
+            android:inputType="numberDecimal"
             android:paddingLeft="4dp" />
     </LinearLayout>
 

@@ -15,7 +15,6 @@ import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,15 +32,13 @@ import java.text.DecimalFormat;
 public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     /**
-     * Content URI for the existing product (null if it's a new product)
-     */
-    private Uri mCurrentProductUri;
-
-    /**
      * Identifier for the product data loader
      */
     private static final int EXISTING_PRODUCT_LOADER = 0;
-
+    /**
+     * Content URI for the existing product (null if it's a new product)
+     */
+    private Uri mCurrentProductUri;
     private EditText mNameEditText;
     private EditText mPriceEditText;
     private TextView mQuantityTextView;
@@ -202,6 +199,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 String priceString = mPriceEditText.getText().toString().trim();
                 String quantityString = mQuantityTextView.getText().toString().trim();
                 Bitmap bitmap = ((BitmapDrawable) mImageView.getDrawable()).getBitmap();
+
+                //ImageUtils.getByte convert the image into desire format (PNG) in the form byte[]
                 byte[] imageByteArray = ImageUtils.getBytes(bitmap);
 
                 //check if the input is validated
@@ -212,7 +211,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 } else if (priceString.isEmpty()) {
                     Toast.makeText(this, getString(R.string.edit_price_blank), Toast.LENGTH_SHORT).show();
                     return true;
-                } else if (((BitmapDrawable) mImageView.getDrawable()).getBitmap() == null) {
+                } else if //check whether the image is empty
+                        (((BitmapDrawable) mImageView.getDrawable()).getBitmap() == null) {
                     Toast.makeText(this, getString(R.string.edit_image_blank), Toast.LENGTH_SHORT).show();
                     return true;
                 }
@@ -262,27 +262,21 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
      * Get user input from editor and save product into database.
      */
     private void saveProduct(String nameString, String priceString, String quantityString, byte[] imageByteArray) {
-        // Read from input fields
-        // Use trim to eliminate leading or trailing white space
-
-
-        // Check if this is supposed to be a new product
-        // and check if all the fields in the editor are blank
-
 
         // Create a ContentValues object where column names are the keys,
         // and product attributes from the editor are the values.
         ContentValues values = new ContentValues();
         values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_NAME, nameString);
         values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_QUANTITY, Integer.parseInt(quantityString));
+
+        //insert byte[] into the values object
+        // we all ready set default picture of the product in the layout
+        // so the app won't crush even though users input no image
         values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_IMAGE_RESOURCE, imageByteArray);
-        // If the weight is not provided by the user, don't try to parse the string into an
-        // integer value. Use 0 by default.
-        double price = 0;
-        if (!TextUtils.isEmpty(priceString)) {
-            price = Double.parseDouble(priceString);
-        }
-        values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE, price);
+
+        //we can put the priceString into value without crashing the app
+        // because in activity_editor.xml has specified the inputType of this editText as decimal number
+        values.put(ProductContract.ProductEntry.COLUMN_PRODUCT_PRICE, Double.parseDouble(priceString));
 
         // Determine if this is a new or existing product by checking if mCurrentPetUri is null or not
         if (mCurrentProductUri == null) {

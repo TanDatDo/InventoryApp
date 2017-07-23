@@ -153,6 +153,7 @@ public class ProductProvider extends ContentProvider {
             }
         }
 
+
         // If the {@link PetEntry#COLUMN_PRODUCT QUANTITY} key is present,
         // check that the quantity value is valid.
         if (values.containsKey(ProductEntry.COLUMN_PRODUCT_QUANTITY)) {
