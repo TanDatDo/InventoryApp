@@ -9,6 +9,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -47,6 +48,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private Button mDecreaseButton;
     private Button mOrderButton;
     private Button mImportPictureButton;
+    private Drawable mOldDrawable;
 
     private int PICK_IMAGE_REQUEST = 1;
 
@@ -88,6 +90,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mPriceEditText = (EditText) findViewById(R.id.edit_product_price);
         mQuantityTextView = (TextView) findViewById(R.id.edit_product_quantity);
         mImageView = (ImageView) findViewById(R.id.edit_product_image);
+        //use this variable later to confirm whether the users insert blank image
+        mOldDrawable = mImageView.getDrawable();
         mIncreaseButton = (Button) findViewById(R.id.increase_button);
         mDecreaseButton = (Button) findViewById(R.id.decrease_button);
         mOrderButton = (Button) findViewById(R.id.order_button);
@@ -198,9 +202,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 String nameString = mNameEditText.getText().toString().trim();
                 String priceString = mPriceEditText.getText().toString().trim();
                 String quantityString = mQuantityTextView.getText().toString().trim();
-                Bitmap bitmap = ((BitmapDrawable) mImageView.getDrawable()).getBitmap();
-
-
 
                 //check if the input is validated
                 //if unvalidated, show specific toast messages and return to the editor layout
@@ -211,13 +212,14 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     Toast.makeText(this, getString(R.string.edit_price_blank), Toast.LENGTH_SHORT).show();
                     return true;
                 } else if //check whether the image is empty
-                        (((BitmapDrawable) mImageView.getDrawable()).getBitmap() == null) {
+                        (mImageView.getDrawable() == mOldDrawable) {
                     Toast.makeText(this, getString(R.string.edit_image_blank), Toast.LENGTH_SHORT).show();
                     return true;
                 }
                 //the input is in accepted form, save product, and finish activity
                 else {
-
+                    //validation successful, image view contain the desire picture so get the Bitmap of the picture
+                    Bitmap bitmap = ((BitmapDrawable) mImageView.getDrawable()).getBitmap();
                     //ImageUtils.getByte convert the image into desire format (PNG) in the form byte[]
                     byte[] imageByteArray = ImageUtils.getBytes(bitmap);
 
