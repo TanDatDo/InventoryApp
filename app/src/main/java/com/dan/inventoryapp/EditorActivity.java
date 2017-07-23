@@ -200,8 +200,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 String quantityString = mQuantityTextView.getText().toString().trim();
                 Bitmap bitmap = ((BitmapDrawable) mImageView.getDrawable()).getBitmap();
 
-                //ImageUtils.getByte convert the image into desire format (PNG) in the form byte[]
-                byte[] imageByteArray = ImageUtils.getBytes(bitmap);
+
 
                 //check if the input is validated
                 //if unvalidated, show specific toast messages and return to the editor layout
@@ -218,6 +217,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 }
                 //the input is in accepted form, save product, and finish activity
                 else {
+
+                    //ImageUtils.getByte convert the image into desire format (PNG) in the form byte[]
+                    byte[] imageByteArray = ImageUtils.getBytes(bitmap);
+
                     // Save product to database
                     saveProduct(nameString, priceString, quantityString, imageByteArray);
                     // Exit activity
