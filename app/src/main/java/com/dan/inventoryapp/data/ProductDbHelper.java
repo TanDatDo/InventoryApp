@@ -3,11 +3,12 @@ package com.dan.inventoryapp.data;
 /**
  * Created by Dat T Do on 7/20/2017.
  */
-import com.dan.inventoryapp.data.ProductContract.ProductEntry;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.dan.inventoryapp.data.ProductContract.ProductEntry;
 
 /**
  * Database helper for products app. Manages database creation and version management.

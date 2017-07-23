@@ -11,8 +11,6 @@ import android.util.Log;
 
 import com.dan.inventoryapp.data.ProductContract.ProductEntry;
 
-import java.sql.Blob;
-
 /**
  * Created by Dat T Do on 7/20/2017.
  */
@@ -33,12 +31,6 @@ public class ProductProvider extends ContentProvider {
      * URI matcher code for the content URI for a single product in the products table
      */
     private static final int PRODUCT_ID = 101;
-
-    /**
-     * Database helper object
-     */
-    private ProductDbHelper mDbHelper;
-
     /**
      * UriMatcher object to match a content URI to a corresponding code.
      * The input passed into the constructor represents the code to return for the root URI.
@@ -66,6 +58,11 @@ public class ProductProvider extends ContentProvider {
         // "content://com.example.android.products/products" (without a number at the end) doesn't match.
         sUriMatcher.addURI(ProductContract.CONTENT_AUTHORITY, ProductContract.PATH_PRODUCTS + "/#", PRODUCT_ID);
     }
+
+    /**
+     * Database helper object
+     */
+    private ProductDbHelper mDbHelper;
 
     @Override
     public boolean onCreate() {

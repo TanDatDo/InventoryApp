@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
-    android:padding="5dp"
-    android:descendantFocusability="blocksDescendants">
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/image_view"
@@ -43,22 +43,22 @@
             android:textAppearance="?android:textAppearanceSmall"
             android:textStyle="italic"
             tools:text="Price: 100.00£" />
+
         <TextView
             android:id="@+id/quantity_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            tools:text="Quantity: 100"
-            android:textAppearance="?android:textAppearanceSmall"/>
+            android:textAppearance="?android:textAppearanceSmall"
+            tools:text="Quantity: 100" />
 
         <Button
             android:id="@+id/button_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/sale"
             android:focusable="false"
-            />
+            android:text="@string/sale" />
     </LinearLayout>
 
 </LinearLayout>

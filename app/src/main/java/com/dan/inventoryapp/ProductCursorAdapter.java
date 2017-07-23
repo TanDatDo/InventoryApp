@@ -8,7 +8,6 @@ package com.dan.inventoryapp;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -23,8 +22,6 @@ import android.widget.Toast;
 import com.dan.inventoryapp.data.ProductContract.ProductEntry;
 
 import java.text.DecimalFormat;
-
-import static android.R.attr.id;
 
 /**
  * {@link ProductCursorAdapter} is an adapter for a list or grid view

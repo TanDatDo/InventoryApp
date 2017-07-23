@@ -10,25 +10,24 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import android.support.design.widget.FloatingActionButton;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import com.dan.inventoryapp.data.ProductContract.ProductEntry;
 
 
 public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    private static final int PRODUCT_LOADER = 0;
     ListView mListView;
     ProductCursorAdapter mAdapter;
-
-    private static final int PRODUCT_LOADER = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,25 +73,25 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
      */
     private void insertDummyData() {
         insertSampleData("Gone with the Wind", 20.99, 1, R.raw.gone_with_the_wind);
-        insertSampleData("The Great Gatsby",30.11, 1, R.raw.the_great_gatsby);
+        insertSampleData("The Great Gatsby", 30.11, 1, R.raw.the_great_gatsby);
         insertSampleData("Lolita", 20.5, 2, R.raw.lolita);
     }
 
     private void insertSampleData(String productName, double productPrice,
-                                 int productQuantity, int imageResource){
+                                  int productQuantity, int imageResource) {
         // Create a ContentValues object where column names are the keys,
         // and insert a sample values into the ContentValue object
-        ContentValues values=new ContentValues();
+        ContentValues values = new ContentValues();
         values.put(ProductEntry.COLUMN_PRODUCT_NAME, productName);
         values.put(ProductEntry.COLUMN_PRODUCT_PRICE, productPrice);
-        values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY,productQuantity);
+        values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY, productQuantity);
 
         Bitmap bm = BitmapFactory.decodeResource(getResources(), imageResource);
-        byte[] imageByteArray=ImageUtils.getBytes(bm);
+        byte[] imageByteArray = ImageUtils.getBytes(bm);
         //insert the image resource in form of byte[] into the ContentValues object
         values.put(ProductEntry.COLUMN_PRODUCT_IMAGE_RESOURCE, imageByteArray);
 
-        Uri newUri= getContentResolver().insert(ProductEntry.CONTENT_URI, values);
+        Uri newUri = getContentResolver().insert(ProductEntry.CONTENT_URI, values);
     }
 
     /**
@@ -145,6 +144,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 null,                   // No selection arguments
                 null);                  // Default sort order
     }
+
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // Update {@link PetCursorAdapter} with this new cursor containing updated product data
