@@ -7,7 +7,7 @@ Skills related:
 - Cursor Adapter to display data from database into listview
 
 Catalog Activity:displaying the product information
-![alt text](https://scontent-arn2-1.xx.fbcdn.net/v/t34.0-12/20370964_1570386866403290_949530267_n.png?oh=3f0edc760cd9a870b6b9dd0e210f46ad&oe=5978AA0A)
+![alt text](https://github.com/TanDatDo/NanoDegree-Project-InventoryApp/blob/0fb052bf0575ae86262895955b594d8b6316f865/app/src/main/res/drawable/inventory_app_1.png)
 
 Editor Activity:allow users to edit the information
-![alt text](https://scontent-arn2-1.xx.fbcdn.net/v/t34.0-12/20371166_1570386886403288_1303239009_n.png?oh=30647c9699ce56a2184053f1cc58ddc5&oe=59791DE4)
+![alt text](https://github.com/TanDatDo/NanoDegree-Project-InventoryApp/blob/0fb052bf0575ae86262895955b594d8b6316f865/app/src/main/res/drawable/inventory_app_2.png)
